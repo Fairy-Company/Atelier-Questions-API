@@ -37,7 +37,6 @@ CREATE TABLE products(
   default_price INTEGER
 );
 
-
 -- Designate Keys
 ALTER TABLE questions ADD FOREIGN KEY (product_id) REFERENCES products(id);
 ALTER TABLE answers ADD FOREIGN KEY (question_id) REFERENCES questions(id);
