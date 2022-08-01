@@ -1,5 +1,3 @@
-
-
 const { answersQuery } = require('../database/index.js');
 const { queries } = require('../controller/index.js');
 
@@ -7,7 +5,6 @@ const { queries } = require('../controller/index.js');
 const express = require('express');
 const app = express();
 app.use(express.json());
-
 
 // GET  /qa/questions
 app.get('/qa/questions', (req, res) => {
@@ -22,7 +19,7 @@ app.get('/qa/questions', (req, res) => {
 
 // GET  /qa/questions/:question_id/answers
 app.get('/qa/questions/:question_id/answers', (req, res) => {
-  answersQuery(queries.getAnswers)
+  answersQuery(queries.getAnswersTest)
       .then((result) => {
         console.log(result.rows); // delete/refactor later
         res.status(200).send(result.rows);

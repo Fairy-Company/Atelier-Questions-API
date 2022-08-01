@@ -11,11 +11,13 @@ const client = new Client({
 
 client.connect();
 
-// const mainQuery = {
-//   query: (text, params) => {
-//     return client.query(text, params);
-//   },
-// };
+
+exports.questionsQuery = () => {
+  const queryStr = queries.getQuestionsTest;
+  console.log(queryStr);
+  return client.query(queryStr);
+};
+
 
 exports.answersQuery = () => {
   const queryStr = queries.getAnswersTest;
@@ -23,6 +25,15 @@ exports.answersQuery = () => {
   return client.query(queryStr);
 };
 
-exports.getQuestion = () => {
+// exports.photosQuery = () => {
+//   const queryStr = queries.getAnswersTest;
+//   console.log(queryStr);
+//   return client.query(queryStr);
+// };
 
-};
+
+// exports.productsQuery = () => {
+//   const queryStr = queries.getAnswersTest;
+//   console.log(queryStr);
+//   return client.query(queryStr);
+// };
