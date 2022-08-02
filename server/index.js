@@ -1,5 +1,5 @@
-const { answersQuery } = require('../database/index.js');
-const { queries } = require('../controller/index.js');
+// const { questionsQuery, answersQuery } = require('../database/index.js');
+const { queries } = require('./controller/index.js');
 
 // Standard setup
 const express = require('express');
@@ -7,27 +7,18 @@ const app = express();
 app.use(express.json());
 
 // GET  /qa/questions
-app.get('/qa/questions', (req, res) => {
-  answersQuery(queries.getQuestionsTest)
-      .then((result) => {
-        console.log(result.rows); // delete/refactor later
-        res.status(200).send(result.rows);
-      })
-      .catch((err) => console.log("Error getting Questions, ", err))
-  ;
-});
+app.get('/qa/questions', queries.getQuestionsTest);
 
 // GET  /qa/questions/:question_id/answers
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   answersQuery(queries.getAnswersTest)
       .then((result) => {
-        console.log(result.rows); // delete/refactor later
+        // console.log(result.rows); // delete/refactor later
         res.status(200).send(result.rows);
       })
       .catch((err) => console.log("Error getting Answers: ", err))
   ;
 });
-
 
 // POST /qa/questions
 // app.post('/qa/questions', (req, res) => {
@@ -59,7 +50,6 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
       .catch((err) => console.log("Error posting Answers: ", err))
   ;
 });
-
 
 // PUT  /qa/questions/:question_id/helpful
 // PUT  /qa/questions/:question_id/report

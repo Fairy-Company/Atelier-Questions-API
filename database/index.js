@@ -1,5 +1,7 @@
+/* eslint-disable no-multiple-empty-lines */
+/* eslint-disable padded-blocks */
 const { Client } = require('pg');
-const { queries } = require('../controller/index.js');
+// const { queries } = require('../server/controller/index.js');
 
 const client = new Client({
   user: 'postgres',
@@ -11,19 +13,22 @@ const client = new Client({
 
 client.connect();
 
-
-exports.questionsQuery = () => {
-  const queryStr = queries.getQuestionsTest;
-  console.log(queryStr);
-  return client.query(queryStr);
+exports.questionsQuery = (text, params) => {
+  // console.log(text, params); // Delete later
+  return client.query(text, params);
 };
 
 
-exports.answersQuery = () => {
-  const queryStr = queries.getAnswersTest;
-  console.log(queryStr);
-  return client.query(queryStr);
-};
+
+// exports.answersQuery = () => {
+//   console.log(queries.getAnswersTest); // Delete later
+//   return client.query(queries.getAnswersTest);
+// };
+
+
+// exports.postAnswer = () => {
+
+// };
 
 // exports.photosQuery = () => {
 //   const queryStr = queries.getAnswersTest;
