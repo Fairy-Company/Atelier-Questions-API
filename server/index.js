@@ -6,19 +6,28 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-// GET  /qa/questions
-app.get('/qa/questions', queries.getQuestionsTest);
 
-// GET  /qa/questions/:question_id/answers
-app.get('/qa/questions/:question_id/answers', (req, res) => {
-  answersQuery(queries.getAnswersTest)
-      .then((result) => {
-        // console.log(result.rows); // delete/refactor later
-        res.status(200).send(result.rows);
-      })
-      .catch((err) => console.log("Error getting Answers: ", err))
-  ;
-});
+// GET  /qa/questions
+app.get('/qa/questions', queries.getQuestions);
+
+
+// GET  /qa/questions/:question_id/answers --- OLD ---
+// app.get('/qa/questions/:question_id/answers', (req, res) => {
+//   answersQuery(queries.getAnswers)
+//       .then((result) => {
+//         // console.log(result.rows); // delete/refactor later
+//         res.status(200).send(result.rows);
+//       })
+//       .catch((err) => console.log("Error getting Answers: ", err))
+//   ;
+// });
+
+
+// GET  /qa/questions/:question_id/answers --- NEW ---
+// let eee;
+app.get('/qa/questions/:question_id/answers', queries.getAnswers);
+// let ddd;
+
 
 // POST /qa/questions
 // app.post('/qa/questions', (req, res) => {
@@ -33,23 +42,23 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
 
 
 // POST /qa/questions/:question_id/answers
-app.post('/qa/questions/:question_id/answers', (req, res) => {
-  // [product_id, body, date_written, asker_name, asker_email, reported, helpful]
+// app.post('/qa/questions/:question_id/answers', (req, res) => {
+//   // [product_id, body, date_written, asker_name, asker_email, reported, helpful]
 
-  // var postQuestions = function () {
-  //   `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful)
-  //    VALUES(?, ?, ?, ?, ?, ?, ?)`;
-  // };
+//   // var postQuestions = function () {
+//   //   `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful)
+//   //    VALUES(?, ?, ?, ?, ?, ?, ?)`;
+//   // };
 
 
-  mainQuery.query(queries.postQuestion())
-      .then((result) => {
-        console.log(result.rows); // delete/refactor later
-        res.status(200).send(result.rows);
-      })
-      .catch((err) => console.log("Error posting Answers: ", err))
-  ;
-});
+//   mainQuery.query(queries.postQuestion())
+//       .then((result) => {
+//         console.log(result.rows); // delete/refactor later
+//         res.status(200).send(result.rows);
+//       })
+//       .catch((err) => console.log("Error posting Answers: ", err))
+//   ;
+// });
 
 // PUT  /qa/questions/:question_id/helpful
 // PUT  /qa/questions/:question_id/report

@@ -1,12 +1,14 @@
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable padded-blocks */
 /* eslint-disable no-multiple-empty-lines */
 /* eslint-disable camelcase */
 // Queries needed
-const { questionsQuery } = require('../../database/index.js');
+const { qaQuery } = require('../../database/index.js');
 module.exports.queries = {
 
   // GET
   // get all questions
-  getQuestionsTest: (req, res) => {
+  getQuestions: (req, res) => {
     const { product_id } = req.query;
     const queryStr =
       `SELECT CAST(q.product_id as varchar(5)),
@@ -39,41 +41,59 @@ module.exports.queries = {
         JOIN answers a ON a.question_id = q.id
         WHERE q.product_id = ${product_id}
         GROUP BY q.product_id
+
         limit 5`;
 
-    questionsQuery(queryStr)
+    qaQuery(queryStr)
         .then((result) => {
-          // console.log(result.rows); // delete/refactor later
           res.status(200).send(result.rows[0]);
         })
         .catch((err) => console.log("Error getting Questions, ", err))
     ;
   },
 
+  // Need to implement--------
+  // ORDER BY q.helpful
 
 
-  // get all answers
-  getAnswersTest: `SELECT * from answers limit 5`,
+  // get all answers --- OLD ---
+  // getAnswers: `SELECT * from answers limit 5`,
+
+
+  // get all answers --- NEW ---
+  getAnswers: (req, res) => {
+    const { question_id } = req.query;
+    const queryStr = `SELECT * from answers limit 5`;
+
+    qaQuery(queryStr)
+        .then((result) => {
+          // console.log(result.rows); // delete/refactor later
+          res.status(200).send(result.rows);
+        })
+        .catch((err) => console.log("Error getting Answers: ", err))
+    ;
+
+  },
 
   // get all answers_photos
-  getPhotosTest: `SELECT * from answers_photos limit 5`,
+  // getPhotosTest: `SELECT * from answers_photos limit 5`,
 
   // get all products
-  getProductsTest: `SELECT * from products limit 5`,
+  // getProductsTest: `SELECT * from products limit 5`,
 
 
   // POST
   // POST /qa/questions
-  postQuestion: (params) => {
-    `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful)
-     VALUES(?, ?, ?, ?, ?, ?, ?)`;
-  },
+  // postQuestion: (params) => {
+  //   `INSERT INTO questions(product_id, body, date_written, asker_name, asker_email, reported, helpful)
+  //    VALUES(?, ?, ?, ?, ?, ?, ?)`;
+  // },
 
   // POST /qa/questions/:question_id/answers
-  postAnswer: (params) => {
-    `INSERT INTO answers(question_id, body, date_written, answerer_name, answerer_email, reported, helpful)
-     VALUES(?, ?, ?, ?, ?, ?, ?)`;
-  },
+  // postAnswer: (params) => {
+  //   `INSERT INTO answers(question_id, body, date_written, answerer_name, answerer_email, reported, helpful)
+  //    VALUES(?, ?, ?, ?, ?, ?, ?)`;
+  // },
 
 
 };
@@ -105,26 +125,7 @@ module.exports.queries = {
 // WHERE condition;
 
 
-// EXAMPLE query
-// const IbraheemGetProduct = (product_id) => {
-//   const IbraheemsString =
-//     `SELECT p.product_id AS id, p.campus, p.name, p.slogan, p.description,
-//   p.category, p.default_price::numeric, p.created_at, p.updated_at,
-//   ARRAY_AGG (
-//     json_build_object('feature', f.feature, 'value', f.value)
-//   ) features
-//   FROM products p
-//   JOIN features f
-//   ON p.product_id = f.product_id
-//   WHERE p.product_id = ${productID}
-//   GROUP BY p.product_id;
-//   `;
-//   return (
-//     pool
-//       .query(IbraheemsString)
-//       .catch("ERROR")
-//   )
-// };
+
 
 
 // EXAMPLE DATA

@@ -7,14 +7,13 @@ const client = new Client({
   user: 'postgres',
   host: 'localhost',
   database: 'postgres',
-  // port: 7777,
+  // port: 1128,
   password: 'postgres',
 });
 
 client.connect();
 
-exports.questionsQuery = (text, params) => {
-  // console.log(text, params); // Delete later
+exports.qaQuery = (text, params) => {
   return client.query(text, params);
 };
 
