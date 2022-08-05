@@ -28,18 +28,6 @@ CREATE TABLE answers_photos(
   url VARCHAR(500)
 );
 
-CREATE TABLE products(
-  id INTEGER PRIMARY KEY,
-  name VARCHAR(50),
-  slogan VARCHAR(500),
-  description VARCHAR(500),
-  category VARCHAR(50),
-  default_price INTEGER
-);
-
-
--- Designate Keys
-ALTER TABLE questions ADD FOREIGN KEY (product_id) REFERENCES products(id);
 ALTER TABLE answers ADD FOREIGN KEY (question_id) REFERENCES questions(id);
 ALTER TABLE answers_photos ADD FOREIGN KEY (answer_id) REFERENCES answers(id);
 
@@ -53,6 +41,3 @@ from '/home/coty/Desktop/SDCData-copy/data/Reviews/answers.csv' DELIMITER ',' CS
 
 COPY answers_photos(id, answer_id, url)
 from '/home/coty/Desktop/SDCData-copy/data/QuestionsAnswers/answers_photos.csv' DELIMITER ',' CSV HEADER;
-
-COPY products(id, name, slogan, description, category, default_price)
-from '/home/coty/Desktop/SDCData-copy/data/Reviews/product.csv' DELIMITER ',' CSV HEADER;
