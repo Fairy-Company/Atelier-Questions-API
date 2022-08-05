@@ -1,5 +1,3 @@
-/* eslint-disable no-multiple-empty-lines */
-/* eslint-disable padded-blocks */
 const { Client } = require('pg');
 // const { queries } = require('../server/controller/index.js');
 
@@ -7,7 +5,7 @@ const client = new Client({
   user: 'postgres',
   host: 'localhost',
   database: 'postgres',
-  // port: 1128,
+  port: 5432,
   password: 'postgres',
 });
 
@@ -16,7 +14,6 @@ client.connect();
 exports.qaQuery = (text, params) => {
   return client.query(text, params);
 };
-
 
 
 // exports.answersQuery = () => {

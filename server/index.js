@@ -26,7 +26,17 @@ app.get('/qa/questions', queries.getQuestions);
 // GET  /qa/questions/:question_id/answers --- NEW ---
 // let eee;
 app.get('/qa/questions/:question_id/answers', queries.getAnswers);
-// let ddd;
+
+
+app.get('/loaderio-1aa1b536854c96d338121a98a401c501.txt', (req, res) => {
+  res.send('loaderio-1aa1b536854c96d338121a98a401c501');
+});
+
+const port = 1128;
+
+app.listen(port, function () {
+  console.log(`listening on port ${port}`);
+});
 
 
 // POST /qa/questions
@@ -68,8 +78,3 @@ app.get('/qa/questions/:question_id/answers', queries.getAnswers);
 // Are we sending req.rows because it's the result of a SQL statement?
 // res.body would be... ?
 
-const port = 1128;
-
-app.listen(port, function () {
-  console.log(`listening on port ${port}`);
-});
